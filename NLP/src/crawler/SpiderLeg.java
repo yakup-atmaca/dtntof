@@ -19,69 +19,58 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class SpiderLeg
-{
+public class SpiderLeg {
+
     // We'll use a fake USER_AGENT so the web server thinks the robot is a normal web browser.
-    private static final String USER_AGENT =
-            "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
+    private static final String USER_AGENT
+            = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
     private List<String> links = new LinkedList<String>();
     private Document htmlDocument;
 
-
     /**
-     * This performs all the work. It makes an HTTP request, checks the response, and then gathers
-     * up all the links on the page. Perform a searchForWord after the successful crawl
-     * 
-     * @param url
-     *            - The URL to visit
+     * This performs all the work. It makes an HTTP request, checks the
+     * response, and then gathers up all the links on the page. Perform a
+     * searchForWord after the successful crawl
+     *
+     * @param url - The URL to visit
      * @return whether or not the crawl was successful
      */
-    public boolean crawl(String url)
-    {
-        try
-        {
+    public boolean crawl(String url) {
+        try {
             Connection connection = Jsoup.connect(url).userAgent(USER_AGENT);
             Document htmlDocument = connection.get();
             this.htmlDocument = htmlDocument;
-            if(connection.response().statusCode() == 200) // 200 is the HTTP OK status code
-                                                          // indicating that everything is great.
+            if (connection.response().statusCode() == 200) // 200 is the HTTP OK status code
+            // indicating that everything is great.
             {
                 System.out.println("\n**Visiting** Received web page at " + url);
             }
-            if(!connection.response().contentType().contains("text/html"))
-            {
+            if (!connection.response().contentType().contains("text/html")) {
                 System.out.println("**Failure** Retrieved something other than HTML");
                 return false;
             }
             Elements linksOnPage = htmlDocument.select("a[href]");
             System.out.println("Found (" + linksOnPage.size() + ") links");
-            for(Element link : linksOnPage)
-            {
+            for (Element link : linksOnPage) {
                 this.links.add(link.absUrl("href"));
             }
             return true;
-        }
-        catch(IOException ioe)
-        {
+        } catch (IOException ioe) {
             // We were not successful in our HTTP request
             return false;
         }
     }
 
-
     /**
-     * Performs a search on the body of on the HTML document that is retrieved. This method should
-     * only be called after a successful crawl.
-     * 
-     * @param searchWord
-     *            - The word or string to look for
+     * Performs a search on the body of on the HTML document that is retrieved.
+     * This method should only be called after a successful crawl.
+     *
+     * @param searchWord - The word or string to look for
      * @return whether or not the word was found
      */
-    public boolean searchForWord(String searchWord)
-    {
+    public boolean searchForWord(String searchWord) {
         // Defensive coding. This method should only be used after a successful crawl.
-        if(this.htmlDocument == null)
-        {
+        if (this.htmlDocument == null) {
             System.out.println("ERROR! Call crawl() before performing analysis on the document");
             return false;
         }
@@ -90,24 +79,27 @@ public class SpiderLeg
         return bodyText.toLowerCase().contains(searchWord.toLowerCase());
     }
 
-
-    public List<String> getLinks()
-    {
+    public List<String> getLinks() {
         return this.links;
     }
 
-    public void getValue(String url, String searchWord) throws IOException{
-    
+    public String getValue(String url, String searchWord) throws IOException {
         Connection connection = Jsoup.connect(url).userAgent(USER_AGENT);
-            Document htmlDocument = connection.get();
-             this.htmlDocument = htmlDocument;
+        Document htmlDocument = connection.get();
+        this.htmlDocument = htmlDocument;
         Document doc = Jsoup.parse(this.htmlDocument.toString());
-        
-//        String price = doc.getElementById("offering-price").text();
-//        System.out.println("Price : " + price);
-        
-        //String news = doc.getElementsByClass("detail-content").text();
-         String news = doc.body().text();
-        System.out.println(news);
+
+        String news = doc.body().text();
+        return news;
+    }
+    
+     public String getTime(String url, String searchWord) throws IOException {
+        Connection connection = Jsoup.connect(url).userAgent(USER_AGENT);
+        Document htmlDocument = connection.get();
+        this.htmlDocument = htmlDocument;
+        Document doc = Jsoup.parse(this.htmlDocument.toString());
+
+        String time = doc.getElementById("article:modified_time").text();
+        return time;
     }
 }
