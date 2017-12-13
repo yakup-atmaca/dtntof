@@ -75,13 +75,11 @@ public class NewsDao {
                 listNews.add(news);
             }
 
-          close();
+            close();
 
             return listNews;
         } catch (Exception e) {
-            pstmt.close();
-            rs.close();
-            conn.close();
+            close();
             e.printStackTrace();
             return null;
         }
@@ -109,10 +107,90 @@ public class NewsDao {
                 ((DefaultTableModel) table.getModel()).insertRow(rs.getRow() - 1, row);
             }
 
-          close();
+            close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    public void addNews(News news) {
+
+        try {
+            String query = "INSERT INTO `nlp`.`news`(`DataSetId`,`NewsDate`,`Actors`,`Sentiment`,`Type`,`Value`,`FakeTruthMatchNewsId`,`Topic`,`Url`,`NewsTitle`,`NewsDetail`,`GdeltFactor`,`GlobalEventId`)\n"
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+            connect();
+
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, news.getDataSetId());
+            pstmt.setString(2, news.getNewsDate());
+            pstmt.setString(3, news.getActors());
+            pstmt.setString(4, news.getSentiment());
+            pstmt.setString(5, news.getType());
+            pstmt.setString(6, news.getValue());
+            pstmt.setString(7, news.getFakeTruthMatchNewsId());
+            pstmt.setString(8, news.getTopic());
+            pstmt.setString(9, news.getUrl());
+            pstmt.setString(10, news.getNewsTitle());
+            pstmt.setString(11, news.getNewsDetail());
+            pstmt.setString(12, news.getGdeltFactor());
+            pstmt.setString(13, news.getGlobalEventId());
+
+            pstmt.executeUpdate();
+
+            close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateNews(News news) {
+
+        try {
+            String query = "UPDATE `nlp`.`news` SET `DataSetId` = ?,`NewsDate` = ?,`Actors` = ?,`Sentiment` = ?,`Type` = ?,`Value` = ?,`FakeTruthMatchNewsId` = ?,`Topic` = ?,\n"
+                    + "`Url` = ?,`NewsTitle` = ?,`NewsDetail` =?,`GdeltFactor` = ?,`GlobalEventId` = ? WHERE `NewsId` = ?";
+
+            connect();
+
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, news.getDataSetId());
+            pstmt.setString(2, news.getNewsDate());
+            pstmt.setString(3, news.getActors());
+            pstmt.setString(4, news.getSentiment());
+            pstmt.setString(5, news.getType());
+            pstmt.setString(6, news.getValue());
+            pstmt.setString(7, news.getFakeTruthMatchNewsId());
+            pstmt.setString(8, news.getTopic());
+            pstmt.setString(9, news.getUrl());
+            pstmt.setString(10, news.getNewsTitle());
+            pstmt.setString(11, news.getNewsDetail());
+            pstmt.setString(12, news.getGdeltFactor());
+            pstmt.setString(13, news.getGlobalEventId());
+            pstmt.setInt(14, news.getNewsId());
+
+            pstmt.executeUpdate();
+
+            close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteNews(News news) {
+
+        try {
+            String query = "delete from news WHERE `NewsId` = ?";
+
+            connect();
+
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, news.getNewsId());
+
+            pstmt.executeUpdate();
+
+            close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

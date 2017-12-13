@@ -1,22 +1,21 @@
-
 package view;
 
 import dao.NewsDao;
+import entity.News;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.JOptionPane;
 
 public class DataSetFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DataSetFrame
-     */
+    int newsId;
+
     public DataSetFrame() {
         initComponents();
-        
-        NewsDao newsDao = new  NewsDao();
-        
+
+        NewsDao newsDao = new NewsDao();
+
         try {
             newsDao.fillTable(tblNews);
         } catch (ClassNotFoundException | IOException ex) {
@@ -36,6 +35,39 @@ public class DataSetFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNews = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        txtGdeItFactor = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtGlobalEventId = new javax.swing.JTextField();
+        btnEkle = new javax.swing.JButton();
+        btnGuncelle = new javax.swing.JButton();
+        btnSil = new javax.swing.JButton();
+        btnTemizle = new javax.swing.JButton();
+        txtNewsDate = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtActors = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtNewsId = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtType = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtValue = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtSentiment = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtTopic = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtUrl = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtFakeTruthMatchNewsId = new javax.swing.JTextField();
+        txtNewsTitle = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtNewsDetail = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        txtDataSetId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -47,38 +79,444 @@ public class DataSetFrame extends javax.swing.JFrame {
                 "NewsId", "DataSetId", "NewsDate", "Actors", "Sentiment", "Type", "Value", "FakeTruthMatchNewsId", "Topic", "Url", "NewsTitle", "NewsDetail", "GdeltFactor", "GlobalEventId"
             }
         ));
+        tblNews.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblNewsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblNews);
         tblNews.getAccessibleContext().setAccessibleParent(jPanel1);
+
+        jLabel9.setText("GdeItFactor");
+
+        txtGdeItFactor.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        jLabel11.setText("GlobalEventId");
+
+        btnEkle.setText("EKLE");
+        btnEkle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEkleActionPerformed(evt);
+            }
+        });
+
+        btnGuncelle.setText("GÜNCELLE");
+        btnGuncelle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuncelleActionPerformed(evt);
+            }
+        });
+
+        btnSil.setText("SİL");
+        btnSil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSilActionPerformed(evt);
+            }
+        });
+
+        btnTemizle.setText("TEMİZLE");
+        btnTemizle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTemizleActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 873, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtGdeItFactor, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtGlobalEventId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(btnEkle, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(96, 96, 96)
+                        .addComponent(btnGuncelle, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addComponent(btnSil, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(184, 184, 184)
+                        .addComponent(btnTemizle, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(180, 180, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 103, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtGdeItFactor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtGlobalEventId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEkle)
+                    .addComponent(btnGuncelle)
+                    .addComponent(btnSil)
+                    .addComponent(btnTemizle))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        txtNewsDate.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        jLabel3.setText("Actors");
+
+        jLabel1.setText("NewsId");
+
+        txtNewsId.setEditable(false);
+
+        jLabel2.setText("NewsDate");
+
+        jLabel5.setText("Type");
+
+        txtType.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        jLabel6.setText("Value");
+
+        jLabel7.setText("Sentiment");
+
+        jLabel8.setText("Topic");
+
+        txtTopic.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        jLabel10.setText("Url");
+
+        jLabel12.setText("FakeTruthMatchNewsId");
+
+        jLabel13.setText("NewsTitle");
+
+        jLabel14.setText("NewsDetail");
+
+        txtNewsDetail.setColumns(20);
+        txtNewsDetail.setLineWrap(true);
+        txtNewsDetail.setRows(7);
+        txtNewsDetail.setAutoscrolls(false);
+        jScrollPane2.setViewportView(txtNewsDetail);
+
+        jLabel4.setText("DataSetId");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(31, 31, 31)
+                                .addComponent(txtTopic, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel10))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(61, 61, 61)
+                                        .addComponent(txtNewsId, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(61, 61, 61)
+                                        .addComponent(txtDataSetId, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNewsDate, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtActors, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtSentiment, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtFakeTruthMatchNewsId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNewsTitle)))))
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNewsId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNewsDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtActors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtSentiment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtFakeTruthMatchNewsId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtDataSetId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtTopic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtNewsTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblNewsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNewsMouseClicked
+        newsId = (int) tblNews.getValueAt(tblNews.getSelectedRow(), 0);
+        txtNewsId.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 0).toString());
+
+        if (tblNews.getValueAt(tblNews.getSelectedRow(), 1) != null) {
+            txtDataSetId.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 1).toString());
+        } else {
+            txtDataSetId.setText("");
+        }
+
+        if (tblNews.getValueAt(tblNews.getSelectedRow(), 2) != null) {
+            txtNewsDate.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 2).toString());
+        } else {
+            txtNewsDate.setText("");
+        }
+
+        if (tblNews.getValueAt(tblNews.getSelectedRow(), 3) != null) {
+            txtActors.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 3).toString());
+        } else {
+            txtActors.setText("");
+        }
+
+        if (tblNews.getValueAt(tblNews.getSelectedRow(), 4) != null) {
+            txtSentiment.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 4).toString());
+        } else {
+            txtSentiment.setText("");
+        }
+
+        if (tblNews.getValueAt(tblNews.getSelectedRow(), 5) != null) {
+            txtType.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 5).toString());
+        } else {
+            txtType.setText("");
+        }
+
+        if (tblNews.getValueAt(tblNews.getSelectedRow(), 6) != null) {
+            txtValue.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 6).toString());
+        } else {
+            txtValue.setText("");
+        }
+
+        if (tblNews.getValueAt(tblNews.getSelectedRow(), 7) != null) {
+            txtFakeTruthMatchNewsId.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 7).toString());
+        } else {
+            txtFakeTruthMatchNewsId.setText("");
+        }
+
+        if (tblNews.getValueAt(tblNews.getSelectedRow(), 8) != null) {
+            txtTopic.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 8).toString());
+        } else {
+            txtTopic.setText("");
+        }
+
+        if (tblNews.getValueAt(tblNews.getSelectedRow(), 9) != null) {
+            txtUrl.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 9).toString());
+        } else {
+            txtUrl.setText("");
+        }
+
+        if (tblNews.getValueAt(tblNews.getSelectedRow(), 10) != null) {
+            txtNewsTitle.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 10).toString());
+        } else {
+            txtNewsTitle.setText("");
+        }
+
+        if (tblNews.getValueAt(tblNews.getSelectedRow(), 11) != null) {
+            txtNewsDetail.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 11).toString());
+        } else {
+            txtNewsDetail.setText("");
+        }
+
+        if (tblNews.getValueAt(tblNews.getSelectedRow(), 12) != null) {
+            txtGdeItFactor.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 12).toString());
+        } else {
+            txtGdeItFactor.setText("");
+        }
+        if (tblNews.getValueAt(tblNews.getSelectedRow(), 13) != null) {
+            txtGlobalEventId.setText(tblNews.getValueAt(tblNews.getSelectedRow(), 13).toString());
+        } else {
+            txtGlobalEventId.setText("");
+        }
+
+
+    }//GEN-LAST:event_tblNewsMouseClicked
+    public void temizle() {
+        txtNewsId.setText("");
+        txtDataSetId.setText("");
+        txtNewsDate.setText("");
+        txtActors.setText("");
+        txtSentiment.setText("");
+        txtType.setText("");
+        txtValue.setText("");
+        txtFakeTruthMatchNewsId.setText("");
+        txtTopic.setText("");
+        txtUrl.setText("");
+        txtNewsTitle.setText("");
+        txtNewsDetail.setText("");
+        txtGdeItFactor.setText("");
+        txtGlobalEventId.setText("");
+    }
+    private void btnEkleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEkleActionPerformed
+
+        News news = new News();
+        NewsDao newsDao = new NewsDao();
+        String msg = "Lütfen DataSetId alanını boş bırakmayınız!";
+
+        try {
+            if ("".equals(txtDataSetId.getText().trim())) {
+                JOptionPane.showMessageDialog(null, msg, "Gerekli Alan Uyarısı", JOptionPane.ERROR_MESSAGE);
+            } else {
+                news.setDataSetId(txtDataSetId.getText().toString());
+                news.setNewsDate(txtNewsDate.getText().toString());
+                news.setActors(txtActors.getText().toString());
+                news.setSentiment(txtSentiment.getText().toString());
+                news.setType(txtType.getText().toString());
+                news.setValue(txtValue.getText().toString());
+                news.setFakeTruthMatchNewsId(txtFakeTruthMatchNewsId.getText().toString());
+                news.setTopic(txtTopic.getText().toString());
+                news.setUrl(txtUrl.getText().toString());
+                news.setNewsTitle(txtNewsTitle.getText().toString());
+                news.setNewsDetail(txtNewsDetail.getText().toString());
+                news.setGdeltFactor(txtGdeItFactor.getText().toString());
+                news.setGlobalEventId(txtGlobalEventId.getText().toString());
+
+                newsDao.addNews(news);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            newsDao.fillTable(tblNews);
+            temizle();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnEkleActionPerformed
+
+    private void btnTemizleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemizleActionPerformed
+        temizle();
+    }//GEN-LAST:event_btnTemizleActionPerformed
+
+    private void btnGuncelleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuncelleActionPerformed
+        News news = new News();
+        NewsDao newsDao = new NewsDao();
+        String msg = "Lütfen tablodan bir kayıt seçiniz!";
+
+        try {
+            if ("".equals(txtNewsId.getText().trim())) {
+                JOptionPane.showMessageDialog(null, msg, "Gerekli Alan Uyarısı", JOptionPane.ERROR_MESSAGE);
+            } else {
+                news.setNewsId(Integer.parseInt(txtNewsId.getText().toString()));
+                news.setDataSetId(txtDataSetId.getText().toString());
+                news.setNewsDate(txtNewsDate.getText().toString());
+                news.setActors(txtActors.getText().toString());
+                news.setSentiment(txtSentiment.getText().toString());
+                news.setType(txtType.getText().toString());
+                news.setValue(txtValue.getText().toString());
+                news.setFakeTruthMatchNewsId(txtFakeTruthMatchNewsId.getText().toString());
+                news.setTopic(txtTopic.getText().toString());
+                news.setUrl(txtUrl.getText().toString());
+                news.setNewsTitle(txtNewsTitle.getText().toString());
+                news.setNewsDetail(txtNewsDetail.getText().toString());
+                news.setGdeltFactor(txtGdeItFactor.getText().toString());
+                news.setGlobalEventId(txtGlobalEventId.getText().toString());
+
+                newsDao.updateNews(news);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            newsDao.fillTable(tblNews);
+            temizle();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnGuncelleActionPerformed
+
+    private void btnSilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSilActionPerformed
+                                                  
+        News news = new News();
+        NewsDao newsDao = new NewsDao();
+        String msg = "Lütfen tablodan bir kayıt seçiniz!";
+
+        try {
+            if ("".equals(txtNewsId.getText().trim())) {
+                JOptionPane.showMessageDialog(null, msg, "Gerekli Alan Uyarısı", JOptionPane.ERROR_MESSAGE);
+            } else {
+                news.setNewsId(Integer.parseInt(txtNewsId.getText().toString()));               
+
+                newsDao.deleteNews(news);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            newsDao.fillTable(tblNews);
+            temizle();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnSilActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,8 +554,41 @@ public class DataSetFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEkle;
+    private javax.swing.JButton btnGuncelle;
+    private javax.swing.JButton btnSil;
+    private javax.swing.JButton btnTemizle;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblNews;
+    private javax.swing.JTextField txtActors;
+    private javax.swing.JTextField txtDataSetId;
+    private javax.swing.JTextField txtFakeTruthMatchNewsId;
+    private javax.swing.JTextField txtGdeItFactor;
+    private javax.swing.JTextField txtGlobalEventId;
+    private javax.swing.JTextField txtNewsDate;
+    private javax.swing.JTextArea txtNewsDetail;
+    private javax.swing.JTextField txtNewsId;
+    private javax.swing.JTextField txtNewsTitle;
+    private javax.swing.JTextField txtSentiment;
+    private javax.swing.JTextField txtTopic;
+    private javax.swing.JTextField txtType;
+    private javax.swing.JTextField txtUrl;
+    private javax.swing.JTextField txtValue;
     // End of variables declaration//GEN-END:variables
 }
