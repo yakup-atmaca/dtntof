@@ -3,8 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/dao/TypeDao.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/dao/NewsDao.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/entity/Topic.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/dao/SentimentDao.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/view/ManuelFrame.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/dao/DataSetDao.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/entity/News.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/view/DataSetFrame.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/entity/Dataset.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/entity/Type.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/view/MainFrame.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/dao/TopicDao.java</file>
             <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/crawler/SpiderLeg.java</file>
-            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/crawler/Spider.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/entity/Value.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/dao/MyDataSource.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/entity/Sentiment.java</file>
+            <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/dao/ValueDao.java</file>
             <file>file:/C:/Users/Yakup/Documents/NetBeansProjects/NLP/src/crawler/WebCrawler.java</file>
         </group>
     </open-files>

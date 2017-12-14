@@ -49,7 +49,9 @@ public class NewsDao {
         try {
             connect();
 
-            String sorgu = "select * from news order by NewsId";
+            String sorgu = "SELECT NewsId, d.*, NewsDate, Actors, s.*, ty.*, v.*, FakeTruthMatchNewsId,  t.*,  Url,  NewsTitle, NewsDetail\n"
+                    + "FROM nlp.news n, nlp.dataset d, nlp.sentiment s, nlp.topic t, nlp.type ty, nlp.value v\n"
+                    + "where n.DataSetId = d.DataSetId and n.SentimentId = s.SentimentId and n.TypeId = ty.TypeId and n.ValueId = v.ValueId and n.TopicId = t.TopicId order by NewsId";
 
             pstmt = conn.prepareStatement(sorgu);
 
@@ -58,19 +60,22 @@ public class NewsDao {
             while (rs.next()) {
                 News news = new News();
                 news.setNewsId(rs.getInt("NewsId"));
-                news.setDataSetId(rs.getString("DataSetId"));
-                news.setNewsDate(rs.getString("NewsDate"));
+                news.getDataSetId().setDataSetId(rs.getInt("DataSetId"));
+                news.getDataSetId().setDataSetName(rs.getString("DataSetName"));
+                news.setNewsDate(rs.getDate("NewsDate"));
                 news.setActors(rs.getString("Actors"));
-                news.setSentiment(rs.getString("Sentiment"));
-                news.setType(rs.getString("Type"));
-                news.setValue(rs.getString("Value"));
-                news.setFakeTruthMatchNewsId(rs.getString("FakeTruthMatchNewsId"));
-                news.setTopic(rs.getString("Topic"));
+                news.getSentimentId().setSentimentId(rs.getInt("SentimentId"));
+                news.getSentimentId().setSentimentName(rs.getString("SentimentName"));
+                news.getTypeId().setTypeId(rs.getInt("TypeId"));
+                news.getTypeId().setTypeName(rs.getString("TypeName"));
+                news.getValueId().setValueId(rs.getInt("ValueId"));
+                news.getValueId().setValueName(rs.getString("ValueName"));
+                news.setFakeTruthMatchNewsId(rs.getInt("FakeTruthMatchNewsId"));
+                news.getTopicId().setTopicId(rs.getInt("TopicId"));
+                news.getTopicId().setTopicName(rs.getString("TopicId"));
                 news.setUrl(rs.getString("Url"));
                 news.setNewsTitle(rs.getString("NewsTitle"));
                 news.setNewsDetail(rs.getString("NewsDetail"));
-                news.setGdeltFactor(rs.getString("GdeltFactor"));
-                news.setGlobalEventId(rs.getString("GlobalEventId"));
 
                 listNews.add(news);
             }
@@ -88,7 +93,9 @@ public class NewsDao {
     public void fillTable(JTable table) throws ClassNotFoundException, IOException {
 
         try {
-            String query = "select * from news order by NewsId";
+            String query = "SELECT NewsId, d.DataSetName, NewsDate, Actors, s.SentimentName, ty.TypeName, v.ValueName, FakeTruthMatchNewsId,  t.TopicName,  Url,  NewsTitle, NewsDetail\n"
+                    + "FROM nlp.news n, nlp.dataset d, nlp.sentiment s, nlp.topic t, nlp.type ty, nlp.value v\n"
+                    + "where n.DataSetId = d.DataSetId and n.SentimentId = s.SentimentId and n.TypeId = ty.TypeId and n.ValueId = v.ValueId and n.TopicId = t.TopicId order by NewsId";
 
             connect();
             pstmt = conn.prepareStatement(query);
@@ -116,25 +123,23 @@ public class NewsDao {
     public void addNews(News news) {
 
         try {
-            String query = "INSERT INTO `nlp`.`news`(`DataSetId`,`NewsDate`,`Actors`,`Sentiment`,`Type`,`Value`,`FakeTruthMatchNewsId`,`Topic`,`Url`,`NewsTitle`,`NewsDetail`,`GdeltFactor`,`GlobalEventId`)\n"
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO news(DataSetId,NewsDate,Actors,SentimentId,TypeId,ValueId,FakeTruthMatchNewsId,TopicId,Url,NewsTitle,NewsDetail)\n"
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
             connect();
 
             pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, news.getDataSetId());
-            pstmt.setString(2, news.getNewsDate());
+            pstmt.setInt(1, news.getDataSetId().getDataSetId());
+            pstmt.setDate(2, (java.sql.Date) news.getNewsDate());
             pstmt.setString(3, news.getActors());
-            pstmt.setString(4, news.getSentiment());
-            pstmt.setString(5, news.getType());
-            pstmt.setString(6, news.getValue());
-            pstmt.setString(7, news.getFakeTruthMatchNewsId());
-            pstmt.setString(8, news.getTopic());
+            pstmt.setInt(4, news.getSentimentId().getSentimentId());
+            pstmt.setInt(5, news.getTypeId().getTypeId());
+            pstmt.setInt(6, news.getValueId().getValueId());
+            pstmt.setInt(7, news.getFakeTruthMatchNewsId());
+            pstmt.setInt(8, news.getTopicId().getTopicId());
             pstmt.setString(9, news.getUrl());
             pstmt.setString(10, news.getNewsTitle());
             pstmt.setString(11, news.getNewsDetail());
-            pstmt.setString(12, news.getGdeltFactor());
-            pstmt.setString(13, news.getGlobalEventId());
 
             pstmt.executeUpdate();
 
@@ -147,26 +152,25 @@ public class NewsDao {
     public void updateNews(News news) {
 
         try {
-            String query = "UPDATE `nlp`.`news` SET `DataSetId` = ?,`NewsDate` = ?,`Actors` = ?,`Sentiment` = ?,`Type` = ?,`Value` = ?,`FakeTruthMatchNewsId` = ?,`Topic` = ?,\n"
-                    + "`Url` = ?,`NewsTitle` = ?,`NewsDetail` =?,`GdeltFactor` = ?,`GlobalEventId` = ? WHERE `NewsId` = ?";
+            String query = "UPDATE nlp.news\n"
+                    + "SET DataSetId = ?, NewsDate = ?, Actors = ?, SentimentId = ?, TypeId = ?, ValueId =?, FakeTruthMatchNewsId = ?, TopicId = ?, Url = ?, NewsTitle = ?, NewsDetail = ?\n"
+                    + "WHERE NewsId = ?";
 
             connect();
 
             pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, news.getDataSetId());
-            pstmt.setString(2, news.getNewsDate());
+            pstmt.setInt(1, news.getDataSetId().getDataSetId());
+            pstmt.setDate(2, (java.sql.Date) news.getNewsDate());
             pstmt.setString(3, news.getActors());
-            pstmt.setString(4, news.getSentiment());
-            pstmt.setString(5, news.getType());
-            pstmt.setString(6, news.getValue());
-            pstmt.setString(7, news.getFakeTruthMatchNewsId());
-            pstmt.setString(8, news.getTopic());
+            pstmt.setInt(4, news.getSentimentId().getSentimentId());
+            pstmt.setInt(5, news.getTypeId().getTypeId());
+            pstmt.setInt(6, news.getValueId().getValueId());
+            pstmt.setInt(7, news.getFakeTruthMatchNewsId());
+            pstmt.setInt(8, news.getTopicId().getTopicId());
             pstmt.setString(9, news.getUrl());
             pstmt.setString(10, news.getNewsTitle());
             pstmt.setString(11, news.getNewsDetail());
-            pstmt.setString(12, news.getGdeltFactor());
-            pstmt.setString(13, news.getGlobalEventId());
-            pstmt.setInt(14, news.getNewsId());
+            pstmt.setInt(12, news.getNewsId());
 
             pstmt.executeUpdate();
 

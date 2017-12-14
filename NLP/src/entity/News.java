@@ -1,131 +1,167 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package entity;
 
-public class News {
+import java.io.Serializable;
+import java.util.Date;
 
-    private int NewsId;
-    private String DataSetId;
-    private String NewsDate;
-    private String Actors;
-    private String Sentiment;
-    private String Type;
-    private String Value;
-    private String FakeTruthMatchNewsId;
-    private String Topic;
-    private String Url;
-    private String NewsTitle;
-    private String NewsDetail;
-    private String GdeltFactor;
-    private String GlobalEventId;
+public class News implements Serializable {
 
-    public int getNewsId() {
-        return NewsId;
+    private static final long serialVersionUID = 1L;
+
+    private Integer newsId;
+
+    private Date newsDate;
+
+    private String actors;
+
+    private Integer fakeTruthMatchNewsId;
+
+    private String url;
+
+    private String newsTitle;
+
+    private String newsDetail;
+
+    private DataSet dataSetId;
+
+    private Sentiment sentimentId;
+
+    private Topic topicId;
+
+    private Type typeId;
+
+    private Value valueId;
+
+    public News() {
     }
 
-    public void setNewsId(int NewsId) {
-        this.NewsId = NewsId;
+    public News(Integer newsId) {
+        this.newsId = newsId;
     }
 
-    public String getDataSetId() {
-        return DataSetId;
+    public Integer getNewsId() {
+        return newsId;
     }
 
-    public void setDataSetId(String DataSetId) {
-        this.DataSetId = DataSetId;
+    public void setNewsId(Integer newsId) {
+        this.newsId = newsId;
     }
 
-    public String getNewsDate() {
-        return NewsDate;
+    public Date getNewsDate() {
+        return newsDate;
     }
 
-    public void setNewsDate(String NewsDate) {
-        this.NewsDate = NewsDate;
+    public void setNewsDate(Date newsDate) {
+        this.newsDate = newsDate;
     }
 
     public String getActors() {
-        return Actors;
+        return actors;
     }
 
-    public void setActors(String Actors) {
-        this.Actors = Actors;
+    public void setActors(String actors) {
+        this.actors = actors;
     }
 
-    public String getSentiment() {
-        return Sentiment;
+    public Integer getFakeTruthMatchNewsId() {
+        return fakeTruthMatchNewsId;
     }
 
-    public void setSentiment(String Sentiment) {
-        this.Sentiment = Sentiment;
-    }
-
-    public String getType() {
-        return Type;
-    }
-
-    public void setType(String Type) {
-        this.Type = Type;
-    }
-
-    public String getValue() {
-        return Value;
-    }
-
-    public void setValue(String Value) {
-        this.Value = Value;
-    }
-
-    public String getFakeTruthMatchNewsId() {
-        return FakeTruthMatchNewsId;
-    }
-
-    public void setFakeTruthMatchNewsId(String FakeTruthMatchNewsId) {
-        this.FakeTruthMatchNewsId = FakeTruthMatchNewsId;
-    }
-
-    public String getTopic() {
-        return Topic;
-    }
-
-    public void setTopic(String Topic) {
-        this.Topic = Topic;
+    public void setFakeTruthMatchNewsId(Integer fakeTruthMatchNewsId) {
+        this.fakeTruthMatchNewsId = fakeTruthMatchNewsId;
     }
 
     public String getUrl() {
-        return Url;
+        return url;
     }
 
-    public void setUrl(String Url) {
-        this.Url = Url;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getNewsTitle() {
-        return NewsTitle;
+        return newsTitle;
     }
 
-    public void setNewsTitle(String NewsTitle) {
-        this.NewsTitle = NewsTitle;
+    public void setNewsTitle(String newsTitle) {
+        this.newsTitle = newsTitle;
     }
 
     public String getNewsDetail() {
-        return NewsDetail;
+        return newsDetail;
     }
 
-    public void setNewsDetail(String NewsDetail) {
-        this.NewsDetail = NewsDetail;
+    public void setNewsDetail(String newsDetail) {
+        this.newsDetail = newsDetail;
     }
 
-    public String getGdeltFactor() {
-        return GdeltFactor;
+    public DataSet getDataSetId() {
+        return dataSetId;
     }
 
-    public void setGdeltFactor(String GdeltFactor) {
-        this.GdeltFactor = GdeltFactor;
+    public void setDataSetId(DataSet dataSetId) {
+        this.dataSetId = dataSetId;
     }
 
-    public String getGlobalEventId() {
-        return GlobalEventId;
+    public Sentiment getSentimentId() {
+        return sentimentId;
     }
 
-    public void setGlobalEventId(String GlobalEventId) {
-        this.GlobalEventId = GlobalEventId;
+    public void setSentimentId(Sentiment sentimentId) {
+        this.sentimentId = sentimentId;
     }
+
+    public Topic getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(Topic topicId) {
+        this.topicId = topicId;
+    }
+
+    public Type getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Type typeId) {
+        this.typeId = typeId;
+    }
+
+    public Value getValueId() {
+        return valueId;
+    }
+
+    public void setValueId(Value valueId) {
+        this.valueId = valueId;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (newsId != null ? newsId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof News)) {
+            return false;
+        }
+        News other = (News) object;
+        if ((this.newsId == null && other.newsId != null) || (this.newsId != null && !this.newsId.equals(other.newsId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "News[ newsId=" + newsId + " ]";
+    }
+
 }
